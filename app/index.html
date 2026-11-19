@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — turn your photo into a multi-panel poster</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" id="controls">
+    <h1>Vice Cover Studio</h1>
+    <p class="tagline">Your photo, your words — a sunset-neon multi-panel poster, exported as a PNG.</p>
+
+    <fieldset>
+      <legend>1 · Photo</legend>
+      <label class="file-label">Upload a photo
+        <input id="photo" type="file" accept="image/*">
+      </label>
+      <div class="samples" id="samples" role="group" aria-label="Sample photos"></div>
+      <p class="hint" id="photoHint">Pick a sample or upload your own. Each panel can use a different photo.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout</legend>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Layout">
+        <button type="button" data-layout="hero" class="on">Hero</button>
+        <button type="button" data-layout="grid4">4-panel grid</button>
+        <button type="button" data-layout="hero3">Hero + 3</button>
+        <button type="button" data-layout="strip3">3 strips</button>
+      </div>
+      <div class="panel-pick" id="panelPick" role="group" aria-label="Panel to adjust"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · This panel</legend>
+      <label>Photo for this panel
+        <select id="panelPhoto"></select>
+      </label>
+      <label>Zoom <span class="val" id="zoomVal">1.20×</span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1.2">
+      </label>
+      <label>Move left / right <span class="val" id="panXVal">0</span>
+        <input id="panX" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <label>Move up / down <span class="val" id="panYVal">0</span>
+        <input id="panY" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Colour grade</legend>
+      <div class="seg wrap" id="gradeSeg" role="group" aria-label="Colour grade">
+        <button type="button" data-grade="sunset" class="on">Sunset</button>
+        <button type="button" data-grade="neon">Neon Night</button>
+        <button type="button" data-grade="golden">Golden Hour</button>
+        <button type="button" data-grade="teal">Teal Vice</button>
+        <button type="button" data-grade="noir">Noir</button>
+      </div>
+      <label>Grade strength <span class="val" id="gradeVal">70%</span>
+        <input id="gradeStrength" type="range" min="0" max="1" step="0.05" value="0.7">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Words</legend>
+      <label>Title
+        <input id="caption" type="text" maxlength="30" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="48" value="One night in the neon city">
+      </label>
+      <label>Title size <span class="val" id="titleVal">100%</span>
+        <input id="titleSize" type="range" min="0.6" max="1.5" step="0.05" value="1">
+      </label>
+      <label>Title colour
+        <select id="titleColor">
+          <option value="#ffffff">White</option>
+          <option value="#ffd166">Sunny yellow</option>
+          <option value="#ff5ea8">Hot pink</option>
+          <option value="#39e6ff">Neon cyan</option>
+          <option value="#111111">Black</option>
+        </select>
+      </label>
+      <label class="check"><input id="showSub" type="checkbox" checked> Show subtitle</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>6 · Export PNG</legend>
+      <div class="export-row">
+        <button id="exportSquare" type="button">1080 × 1080</button>
+        <button id="exportPortrait" type="button">1080 × 1350</button>
+        <button id="exportWide" type="button">1920 × 1080</button>
+      </div>
+      <p id="status" role="status"></p>
+      <button id="reset" type="button" class="ghost">Reset to the Boulevard Queen poster</button>
+    </fieldset>
+
+    <p class="fineprint">Made with your own photos. No official artwork, logos or fonts are used here —
+      the display type is Anton (SIL Open Font License, vendored under <code>fonts/</code>).
+      Works fully offline once loaded.</p>
+  </section>
+
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080" aria-label="The poster preview"></canvas>
+    <p class="stage-hint">Preview — the exported PNG is rendered at full size.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
